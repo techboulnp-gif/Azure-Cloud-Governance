@@ -11,15 +11,27 @@ Building upon the **17,555 user identities** synchronized from the local domain 
 * **Identity Source**: Hybrid-synced identities from `mylab.local`
 * **Management Tools**: Entra Admin Center, RBAC Engine
 
+
+### 🏗️ Infrastructure & Governance Overview
+
+| Component | Technical Specification | Engineering Note |
+| :--- | :--- | :--- |
+| **Cloud Tenant** | Microsoft Entra ID (Free/P2 Trial) | Scaled from 17,555 synced identities |
+| **Primary Identity Source** | Hybrid-Synced (mylab.local) | Managed via Entra Connect |
+| **Access Strategy** | RBAC (Role-Based Access Control) | Tiered: User Admin & Helpdesk Admin |
+| **Security Baseline** | Security Defaults | Mandates MFA registration tenant-wide |
+| **Premium Feature** | SSPR (Self-Service Password Reset) | Scoped via P2 Group-based licensing |
+| **Financial Governance** | Cost Management | Recurring billing disabled to prevent trial charges |
+
 ---
 
 ## 🚀 Phase 1: Identity Governance & RBAC
 
-### 📋 Task 1: Tiered Administrative Role Assignment
+###  Step 1: Tiered Administrative Role Assignment
 **Objective:** Implement the principle of least privilege by delegating specific cloud permissions to synced identities.
 
 **Detailed Steps:**
-1. **Identity Search:** Navigate to **Identity** > **Users** > **All users** and locate the synced identity `bab.gasavo`.
+1. **Identity Search:** Navigate to **Identity** > **Users** > **All users** and locate the synced identity `bab.gasavo@mylab.local`.
 2. **Access Role Menu:** Open the user's profile and select **Assigned roles** from the left-hand navigation pane.
 3. **Add Assignment:** Click **+ Add assignments** at the top of the screen.
 4. **Role Selection:** Search for and select the **User Administrator** role, then click **Add**.
@@ -27,7 +39,7 @@ Building upon the **17,555 user identities** synchronized from the local domain 
 
 ![RBAC Assignment](https://raw.githubusercontent.com/techboulnp-gif/Azure-Cloud-Governance/main/Phase%201/01_RBAC_Role_Assignment.png)
 
-### 📋 Task 2: Security Group Architecture & License Pivot
+###  Step 2: Security Group Architecture & License Pivot
 **Objective:** Create a centralized management container for the IT staff while documenting infrastructure constraints.
 
 **Detailed Steps:**
@@ -39,7 +51,7 @@ Building upon the **17,555 user identities** synchronized from the local domain 
 
 ![Group Creation Settings](https://github.com/techboulnp-gif/Azure-Cloud-Governance-Lab/blob/06d56b1579f8afc1d5746b61ee6106cf29c712fb/Phase%201/2%20Group%20Creation%20Settings.png)
 
-### 📋 Task 3: Manual Identity Provisioning (The Pilot Group)
+###  Step 3: Manual Identity Provisioning (The Pilot Group)
 **Objective:** Manually link synced identities to the new security container for pilot testing.
 
 **Detailed Steps:**
@@ -50,7 +62,7 @@ Building upon the **17,555 user identities** synchronized from the local domain 
 
 ![Membership Selection](https://raw.githubusercontent.com/techboulnp-gif/Azure-Cloud-Governance/main/Phase%201/03_Manual_Group_Membership.png)
 
-### 📋 Task 4: Membership Verification & Integrity Check
+###  Step 4: Membership Verification & Integrity Check
 **Objective:** Confirm the successful commit of identities to the cloud object.
 
 **Detailed Steps:**
@@ -60,7 +72,7 @@ Building upon the **17,555 user identities** synchronized from the local domain 
 
 ![Final Membership List](https://github.com/techboulnp-gif/Azure-Cloud-Governance-Lab/blob/d2b1694b486cf1f99043ca17348a2bb4199c018a/Phase%201/04_IT_Staff_Manual_Members_Final.png)
 
-### 📋 Task 5: Delegation of Support Roles (Helpdesk Admin)
+###  Step 5: Delegation of Support Roles (Helpdesk Admin)
 **Objective:** Demonstrate a multi-tiered support structure by delegating password management to a separate user tier.
 
 **Detailed Steps:**
@@ -70,18 +82,22 @@ Building upon the **17,555 user identities** synchronized from the local domain 
 
 ![Helpdesk Delegation](https://raw.githubusercontent.com/techboulnp-gif/Azure-Cloud-Governance/main/Phase%201/05_Helpdesk_Role_Delegation.png)
 
-## Phase 2: Configuration & Resource Management
+##🚀 Phase 2: Configuration & Resource Management
 
-### Step 1: Security Defaults Enabled
-To establish a rigorous security baseline for the tenant, I enabled **Security Defaults** within the Microsoft Entra ID properties. This foundational step mandates Multi-Factor Authentication (MFA) registration for all users, protecting the organization from common identity-based threats like password spraying and phishing. By enabling this, we ensure that no user can bypass the security requirements regardless of their role.
+###  Step 1: Security Defaults Enabled
+To establish a rigorous security baseline for the tenant, I enabled **Security Defaults** within the Microsoft Entra ID properties. This foundational step mandates Multi-Factor Authentication (MFA) registration for all users, protecting the organization from common identity-based threats.
+
+> **Technical Note on Governance:** Security Defaults is an "all-or-nothing" setting. Enabling this technically enforces MFA for every user in the tenant regardless of role. It is important to note that this global setting may override more granular SSPR "Selected Group" policies, as it mandates security registration across the entire directory.
 ![Security Defaults Enabled](Phase%202/01_Security_Defaults_Enabled.png)
 
 ### Step 2: MFA Method Configuration
 With security defaults active, I specifically configured the **Authentication Methods** allowed for our pilot group. I restricted the verification methods to the **Microsoft Authenticator app** (Push Notifications). This provides the highest level of security and the best user experience, allowing the IT staff to approve password reset requests directly from their mobile devices without needing to manage complex SMS codes or phone calls.
 ![MFA Method Configuration](Phase%202/02_MFA_Method_Configuration.png)
 
-### Step 3: License Assignment
-Self-Service Password Reset (SSPR) for specific groups is an advanced identity management feature. To enable this, I activated a **Microsoft Entra ID P2 Trial**. I then performed a group-based license assignment, granting these premium licenses to every member of the **IT Staff Manual** group. This ensures that the specific security features required for SSPR are legally and technically provisioned for our pilot users.
+###  Step 3: License Assignment
+Self-Service Password Reset (SSPR) for specific groups is an advanced identity management feature that requires premium licensing. I activated a **Microsoft Entra ID P2 Trial** and performed a group-based license assignment, granting these premium licenses to every member of the **IT Staff Manual** group.
+
+> **Licensing Justification:** A Microsoft Entra ID P2 license is required to enable **Group-based scoping** for SSPR. Without this premium tier, SSPR can only be applied globally to "All" users or "None." This license activation is the critical step that allows us to target our specific pilot group.
 ![License Assignment](Phase%202/03_License_Assignment.PNG)
 
 ### Step 4: SSPR Configuration
@@ -94,16 +110,12 @@ As a critical administrative safety measure, I navigated to **Billing > Your pro
 
 ---
 
-## Phase 3: Pilot Testing & Verification
+## 🚀Phase 3: Pilot Testing & Verification
 
 ### Step 1: Authentication Challenge Verification
 To verify the end-to-end configuration, I simulated a real-world "forgot password" scenario for a pilot user. After navigating to the SSPR portal and providing identification, the system correctly identified the user’s group membership and triggered the **Authentication Challenge**. As shown in the screenshot, the user was successfully intercepted and required to approve a notification on their Microsoft Authenticator app. This proves that the Entra ID P2 licenses, the SSPR policy, and the MFA registration are all functioning in perfect synchronization.
 ![Authentication Challenge](https://github.com/techboulnp-gif/Azure-Cloud-Governance-Lab/blob/3b1b424d08c95e8d7837848b6b0f79dcc8b73791/phase%203/1%20SSPR%20Verification%20Challenge.PNG)
 
----
-
-## Project Conclusion
-The implementation of SSPR for the `IT Staff Manual` pilot group is officially complete and verified. We have successfully enabled a zero-trust baseline, provisioned premium licenses, established cost-control safety, and verified the security gate with live testing.
 ---
 
 ## Conclusion
@@ -118,7 +130,7 @@ The SSPR infrastructure is fully configured and verified. Phase 2 established th
 This project serves as the final stage of an end-to-end enterprise identity lifecycle.
 
 * **Step 1: On-Premise Active Directory Home Lab (Project 1)** — Establishing the local DC and 17k users. ✅
-* **Step 2: Azure Hybrid Identity Lab (Project 2)** — Synchronizing local AD with Entra ID via Entra Connect. ✅
+* **Step 2: Microsoft Entra ID Hybrid Identity Lab (Project 2)** — Synchronizing local AD with Entra ID via Entra Connect. ✅
 * **Step 3: Cloud Governance & Security (Project 3)** — Implementing RBAC and security policies. 📍
 
 ### 🎓 Portfolio Navigation
