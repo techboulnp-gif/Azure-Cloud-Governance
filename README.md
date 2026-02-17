@@ -37,7 +37,7 @@ Building upon the **17,555 user identities** synchronized from the local domain 
     * **Note:** This option was unavailable due to the **Entra ID Free** license tier.
 4. **Engineering Decision:** To maintain project momentum, the membership type was set to **Assigned** for manual provisioning.
 
-![Group Creation Settings](https://raw.githubusercontent.com/techboulnp-gif/Azure-Cloud-Governance/main/Phase%201/02_Group_Creation_Settings.png)
+![Group Creation Settings](https://github.com/techboulnp-gif/Azure-Cloud-Governance-Lab/blob/06d56b1579f8afc1d5746b61ee6106cf29c712fb/Phase%201/2%20Group%20Creation%20Settings.png)
 
 ### 📋 Task 3: Manual Identity Provisioning (The Pilot Group)
 **Objective:** Manually link synced identities to the new security container for pilot testing.
@@ -58,7 +58,7 @@ Building upon the **17,555 user identities** synchronized from the local domain 
 2. **Refresh List:** Refreshed the **Members** page to verify the cloud database updated correctly.
 3. **Verification Results:** Confirmed that all 5 users, including the User Administrator `bab.gasavo`, are active members of the group.
 
-![Final Membership List](https://github.com/techboulnp-gif/Azure-Cloud-Governance-Lab/blob/d2b1694b486cf1f99043ca17348a2bb4199c018a/Phase%201/04_IT_Staff_Manual_Members_Final.png))
+![Final Membership List](https://github.com/techboulnp-gif/Azure-Cloud-Governance-Lab/blob/d2b1694b486cf1f99043ca17348a2bb4199c018a/Phase%201/04_IT_Staff_Manual_Members_Final.png)
 
 ### 📋 Task 5: Delegation of Support Roles (Helpdesk Admin)
 **Objective:** Demonstrate a multi-tiered support structure by delegating password management to a separate user tier.
