@@ -98,7 +98,7 @@ As a critical administrative safety measure, I navigated to **Billing > Your pro
 
 ### Step 1: Authentication Challenge Verification
 To verify the end-to-end configuration, I simulated a real-world "forgot password" scenario for a pilot user. After navigating to the SSPR portal and providing identification, the system correctly identified the user’s group membership and triggered the **Authentication Challenge**. As shown in the screenshot, the user was successfully intercepted and required to approve a notification on their Microsoft Authenticator app. This proves that the Entra ID P2 licenses, the SSPR policy, and the MFA registration are all functioning in perfect synchronization.
-![Authentication Challenge](Phase%203/01_Authentication_Challenge.png)
+![Authentication Challenge](https://github.com/techboulnp-gif/Azure-Cloud-Governance-Lab/blob/3b1b424d08c95e8d7837848b6b0f79dcc8b73791/phase%203/1%20SSPR%20Verification%20Challenge.PNG)
 
 ---
 
